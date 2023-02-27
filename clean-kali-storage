@@ -1,5 +1,8 @@
 #!/bin/bash
+echo "list of top 10 space consuming programs\n"
+dpkg-query -W -f='${Installed-Size}\t${Package}\n' | sort -nr | head -10
 
+# Remove old versions of installed packages
 # Remove packages that are no longer required
 sudo apt-get autoremove -y
 
