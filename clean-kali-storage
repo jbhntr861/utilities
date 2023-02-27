@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # Remove packages that are no longer required
 sudo apt-get autoremove -y
 echo "find top 10 largest programs in storage\n"
