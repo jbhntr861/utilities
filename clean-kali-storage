@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Remove packages that are no longer required
+sudo apt-get autoremove -y
+
+# Remove old versions of installed packages
+sudo apt-get autoclean -y
+
+# Clear package cache
+sudo apt-get clean -y
+
+# Remove old kernels and their associated packages
+sudo apt-get remove --purge -y $(dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d')
+
+# Remove old logs and temporary files
+sudo rm -rf /var/log/*
+sudo rm -rf /var/tmp/*
+sudo rm -rf /tmp/*
+
+# Remove thumbnail cache
+sudo rm -rf ~/.cache/thumbnails/*
+
+# Remove orphaned packages
+sudo deborphan | xargs sudo apt-get -y remove --purge
+sudo apt-get autoremove -y
+sudo apt-get autoclean -y
+sudo apt-get clean -y
