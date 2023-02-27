@@ -2,6 +2,8 @@
 
 # Remove packages that are no longer required
 sudo apt-get autoremove -y
+echo "find top 10 largest programs in storage\n"
+dpkg-query -W -f='${Installed-Size}\t${Package}\n' | sort -nr | head -10
 
 # Remove old versions of installed packages
 sudo apt-get autoclean -y
